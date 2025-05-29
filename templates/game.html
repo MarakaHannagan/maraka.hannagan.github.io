@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D&D Dice Roller - Game</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #4a675a, #758e67);
+            color: #faf4e1;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.8);
+            border: 3px solid #faf4e1;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 0 20px #faf4e1;
+        }
+        h1 {
+            text-align: center;
+            color: #faf4e1;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        .character-info {
+            background: rgba(212, 175, 55, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        .action-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 10px;
+            border: 1px solid #faf4e1;
+        }
+        .action-section h3 {
+            color: #faf4e1;
+            margin-top: 0;
+        }
+        button {
+            padding: 12px 20px;
+            background: #758e67;
+            color: #faf4e1;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 5px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: ##758e67;
+        }
+        select, input {
+            padding: 8px;
+            margin: 5px;
+            border: 2px solid #758e67;
+            border-radius: 5px;
+            background: ##758e67;
+            color: #758e67;
+        }
+        .reset-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .reset-link a {
+            color: #758e67;
+            text-decoration: none;
+        }
+        .reset-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="color: #c8a2c8;">🎲 Adventure Awaits! 🎲</h1>
+        
+        <div class="character-info">
+            <h2>Your Character</h2>
+            <p><strong>Class:</strong> {{ player_class }}</p>
+            <p><strong>Level:</strong> {{ player_level }}</p>
+            <p><strong>Ability Score:</strong> {{ ability_score }}</p>
+            <p><strong>Modifier:</strong> {{ modifier }}</p>
+        </div>
+        
+        <div class="action-section">
+            <h3>⚔️ Attack Roll</h3>
+            <p>Roll a d20 and add your modifier for an attack!</p>
+            <form action="/roll" method="POST" style="display: inline;">
+                <input type="hidden" name="action" value="attack">
+                <button type="submit">Roll Attack!</button>
+            </form>
+        </div>
+        
+        <div class="action-section">
+            <h3>🎯 Skill Check</h3>
+            <p>As a {{ player_class }}, you have proficiency in: {{ class_skills|join(', ') }}</p>
+            <form action="/roll" method="POST">
+                <input type="hidden" name="action" value="skill">
+                <select name="skill" required>
+                    <option value="">Choose a skill...</option>
+                    {% for skill in class_skills %}
+                    <option value="{{ skill }}">{{ skill }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit">Roll Skill Check!</button>
+            </form>
+        </div>
+        
+        <div class="action-section">
+            <h3>🛡️ Saving Throw</h3>
+            <p>Roll a d20 and add your proficiency bonus!</p>
+            <form action="/roll" method="POST" style="display: inline;">
+                <input type="hidden" name="action" value="save">
+                <button type="submit">Roll Save!</button>
+            </form>
+        </div>
+        
+        <div class="action-section">
+            <h3>🎲 Dice Roll</h3>
+            <p>Roll any type of dice!</p>
+            <form action="/roll" method="POST">
+                <input type="hidden" name="action" value="dice">
+                <select name="dice_type" required>
+                    <option value="">Choose dice...</option>
+                    <option value="4">d4</option>
+                    <option value="6">d6</option>
+                    <option value="8">d8</option>
+                    <option value="10">d10</option>
+                    <option value="12">d12</option>
+                    <option value="20">d20</option>
+                    <option value="100">d100</option>
+                </select>
+                <button type="submit">Roll Dice!</button>
+            </form>
+        </div>
+        
+        <div class="reset-link">
+            <a href="/reset">🔄 Create New Character</a>
+        </div>
+        
+        <div style="text-align: center; margin-top: 30px; font-size: 14px; opacity: 0.8; color: #faf4e1;">
+            Made by Maraka Hannagan
+        </div>
+    </div>
+</body>
+</html>

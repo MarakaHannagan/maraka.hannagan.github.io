@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D&D Dice Roller - Result</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #4a675a, #758e67);
+            color: #faf4e1;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.8);
+            border: 3px solid #faf4e1;
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 500px;
+            box-shadow: 0 0 20px #faf4e1;
+            text-align: center;
+        }
+        h1 {
+            color: #faf4e1;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        .result {
+            font-size: 24px;
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 10px;
+            border: 2px solid #faf4e1;
+        }
+        .result-value {
+            font-size: 36px;
+            font-weight: bold;
+            color: #faf4e1;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        button {
+            padding: 15px 25px;
+            background: #758e67;
+            color: #faf4e1;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 10px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #4a675a;
+        }
+        .error {
+            color: #ff6b6b;
+            background: rgba(255, 107, 107, 0.2);
+            border: 2px solid #ff6b6b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="color: #c8a2c8;">🎲 Roll Result! 🎲</h1>
+        
+        {% if result.type == 'attack' %}
+            <div class="result">
+                <p>Your attack roll is:</p>
+                <div class="result-value">{{ result.value }}</div>
+            </div>
+        {% elif result.type == 'skill' %}
+            <div class="result">
+                <p>Your {{ result.skill }} check:</p>
+                <div class="result-value">{{ result.value }}</div>
+            </div>
+        {% elif result.type == 'save' %}
+            <div class="result">
+                <p>Your saving throw:</p>
+                <div class="result-value">{{ result.value }}</div>
+            </div>
+        {% elif result.type == 'dice' %}
+            <div class="result">
+                <p>D{{ result.dice_type }} roll:</p>
+                <div class="result-value">{{ result.value }}</div>
+                <p>Nicely done, my lord!</p>
+            </div>
+        {% elif result.type == 'error' %}
+            <div class="result error">
+                <p>{{ result.message }}</p>
+            </div>
+        {% endif %}
+        
+        <button onclick="history.back()">🎲 Roll Again</button>
+        <button onclick="window.location.href='/game'">🏠 Back to Game</button>
+        
+        <div style="margin-top: 30px; font-size: 14px; opacity: 0.8; color: #faf4e1;">
+            Made by Maraka Hannagan
+        </div>
+    </div>
+</body>
+</html>

@@ -1,53 +1,100 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Maraka Hannagan | Portfolio</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D&D Dice Roller</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #2c1810, #8b4513);
+            color: #f4e4bc;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.8);
+            border: 3px solid #d4af37;
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 500px;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+        }
+        h1 {
+            text-align: center;
+            color: #d4af37;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 2px solid #8b4513;
+            border-radius: 5px;
+            background: #f4e4bc;
+            color: #2c1810;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background: #d4af37;
+            color: #2c1810;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #b8941f;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Maraka Hannagan</h1>
-    <p>Junior Python Developer</p>
-  </header>
-
-  <nav>
-    <a href="#projects">Projects</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-  </nav>
-
-  <section id="projects">
-    <h2>Projects</h2>
-    <div class="project">
-      <h3>Ophelia </h3>
-      <p>A job search assistant app using the ChatGPT API.</p>
-      <a href="https://github.com/yourusername/weather-app" target="_blank">GitHub Repo</a>
+    <div class="container">
+        <h1>🎲 Welcome to the Dungeon! 🎲</h1>
+        <p>Let's collect some details about your character.</p>
+        
+        <form action="/setup" method="POST">
+            <label for="player_class">Character Class:</label>
+            <select name="player_class" required>
+                <option value="">Choose your class...</option>
+                <option value="artificer">Artificer</option>
+                <option value="barbarian">Barbarian</option>
+                <option value="bard">Bard</option>
+                <option value="cleric">Cleric</option>
+                <option value="druid">Druid</option>
+                <option value="fighter">Fighter</option>
+                <option value="monk">Monk</option>
+                <option value="paladin">Paladin</option>
+                <option value="ranger">Ranger</option>
+                <option value="rogue">Rogue</option>
+                <option value="sorcerer">Sorcerer</option>
+                <option value="warlock">Warlock</option>
+                <option value="wizard">Wizard</option>
+            </select>
+            
+            <label for="ability_score">Ability Score:</label>
+            <input type="number" name="ability_score" min="1" max="30" required>
+            
+            <label for="player_level">Character Level:</label>
+            <input type="number" name="player_level" min="1" max="20" required>
+            
+            <button type="submit">Enter the Dungeon!</button>
+        </form>
     </div>
-    <div class="project">
-      <h3>Data Analysis: Airbnb</h3>
-      <p>Exploratory data analysis of Airbnb listings using Pandas and Matplotlib.</p>
-      <a href="https://github.com/yourusername/airbnb-data-analysis" target="_blank">GitHub Repo</a>
-    </div>
-  </section>
-
-  <section id="about">
-    <h2>About Me</h2>
-    <p>
-      Hi! I'm a Python developer passionate about building tools, automating tasks, and solving problems through code. I'm especially interested in data, APIs, and backend development.
-    </p>
-  </section>
-
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>Email: maraka.hannagan@gmail.com</p>
-    <p>GitHub: <a href="https://github.com/yourusername" target="_blank">yourusername</a></p>
-    <p>LinkedIn: <a href="https://www.linkedin.com/in/maraka-hannagan-343b8b122/">Your LinkedIn</a></p>
-  </section>
-
-  <footer>
-    <p>© 2025 Maraka Hannagan</p>
-  </footer>
 </body>
 </html>
